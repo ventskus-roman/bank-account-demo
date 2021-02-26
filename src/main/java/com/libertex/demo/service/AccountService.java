@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
+import java.util.WeakHashMap;
 import java.util.function.Predicate;
 
 @Service
@@ -26,7 +27,7 @@ public class AccountService {
     private final TransactionHistoryService transactionHistoryService;
     private final AccountConverter accountConverter;
 
-    private final Map<Long, Long> accountLockMap = new ManagedConcurrentWeakHashMap<>();
+    private final Map<Long, Long> accountLockMap = new WeakHashMap<>();
 
     public AccountDto get(Long accountId) {
         return accountRepository.findById(accountId)
